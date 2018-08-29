@@ -3,3 +3,27 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#mapBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#map {
+  width: 70%;
+  height: 70vh;
+}
+
+.muralLabel {
+  background-color: #377fa8;
+  border-radius: 3px;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  color: white;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  height: -moz-max-content;
+  height: -webkit-max-content;
+}

@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import MuralLabel from "./MuralLabel.js";
+import muralList from "./muralList.json";
 
 class SimpleMap extends React.Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 38.89,
+      lng: -77.01
     },
-    zoom: 11
+    zoom: 15
   };
-
+  createLabelList = () => {
+    return muralList.list.map(function(object, i){
+      return <MuralLabel
+        lat={object.lat}
+        lng={object.lng}
+        text={object.text}
+      />;
+    });
+  }
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div id="map">
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDZyKqgqERLhKTwGTPjzLvQqi7lTFMBLN0" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
-          />
+          {this.createLabelList()}
         </GoogleMapReact>
       </div>
     );
