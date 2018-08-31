@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MuralLabel from "./MuralLabel.js";
-import muralList from "./muralList.json";
 
 class SimpleMap extends React.Component {
   static defaultProps = {
@@ -11,15 +10,17 @@ class SimpleMap extends React.Component {
     },
     zoom: 15
   };
-  createLabelList = () => {
-    return muralList.list.map(function(object, i){
+  createLabelList() {
+    return this.props.murals.map((mural, i) => {
       return <MuralLabel
-        lat={object.lat}
-        lng={object.lng}
-        text={object.text}
+        lat={mural.lat}
+        lng={mural.lng}
+        text={mural.text}
+        key={i}
       />;
     });
   }
+
   render() {
     return (
       // Important! Always set the container height explicitly
