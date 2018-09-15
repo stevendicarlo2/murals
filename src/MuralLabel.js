@@ -6,7 +6,7 @@ class MuralLabel extends Component {
   render() {
     return (
        <div className="muralLabel">
-          {this.props.text}
+          {this.props.mural.text}
        </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MuralLabel from "./MuralLabel.js";
+import history from "./history";
 
 class SimpleMap extends React.Component {
   static defaultProps = {
@@ -15,10 +16,14 @@ class SimpleMap extends React.Component {
       return <MuralLabel
         lat={mural.lat}
         lng={mural.lng}
-        text={mural.text}
+        mural={mural}
         key={i}
       />;
     });
+  }
+
+  onChildClick() {
+    history.push("/menu");
   }
 
   render() {
@@ -29,6 +34,7 @@ class SimpleMap extends React.Component {
           bootstrapURLKeys={{ key: "AIzaSyDZyKqgqERLhKTwGTPjzLvQqi7lTFMBLN0" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
+          onChildClick={this.onChildClick}
         >
           {this.createLabelList()}
         </GoogleMapReact>
