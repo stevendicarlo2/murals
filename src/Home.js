@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
 import SimpleMap from './SimpleMap';
 import CategorySelector from "./CategorySelector";
-import muralList from "./muralList.json";
+import axios from "axios"
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    let categoryList = [];
-    for (let category in muralList) {
-      categoryList.push({"text": category, "selected": true});
-    };
+    this.loadInfo();
     this.state = {
-      murals: muralList,
-      categoryList: categoryList,
+      loading: true,
     };
+  }
+
+  loadInfo() {
+    axios.get('https://muralproject-483dd.firebaseio.com/murals.json')
+    .then(res => {
+      const muralList = res.data;
+      let categoryList = [];
+      for (let category in muralList) {
+        categoryList.push({"text": category, "selected": true});
+      };
+
+      this.setState({
+        murals: muralList,
+        categoryList: categoryList,
+        loading: false,
+      });
+    });
   }
 
   modifyCategory = category => {
@@ -40,6 +53,9 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return null;
+    }
     return (
       <div id="mapBox">
         <SimpleMap
