@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
-import Home from "./Home"
+import Home from "./Home";
+import Menu from "./Menu";
 
 class App extends Component {
   render() {
@@ -16,7 +17,17 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Route exact={true} path={"/"} component={Home}/>
-        <Route exact={true} path={"/home"} component={Home}/>
+        <Route exact={true}
+          path={"/menu"}
+          render={(props) => <Menu {...props}
+          linkList={[
+            {"text": "About", "link": "/about"},
+            {"text": "How does it work?", "link": "/details"},
+            {"text": "Recommend a mural", "link": "/recommend"},
+            {"text": "Feedback", "link": "/feedback"}
+          ]}
+          />}
+        />
       </div>
     );
   }
