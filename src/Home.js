@@ -17,12 +17,18 @@ class Home extends Component {
     .then(res => {
       const muralList = res.data;
       let categoryList = [];
-      for (let category in muralList) {
-        categoryList.push({"text": category, "selected": true});
-      };
+      let activeCategories = {};
+      muralList.forEach(mural => {
+        const category = mural.category;
+        activeCategories[category] = true;
+        if (!categoryList.includes(category)) {
+          categoryList.push(category);
+        }
+      });
 
       this.setState({
         murals: muralList,
+        activeCategories: activeCategories,
         categoryList: categoryList,
         loading: false,
       });
@@ -30,26 +36,20 @@ class Home extends Component {
   }
 
   modifyCategory = category => {
-    let catListCopy = JSON.parse(JSON.stringify(this.state.categoryList));
-    catListCopy.forEach((item, i) => {
-      if (item.text === category.text) {
-        catListCopy[i].selected = category.selected;
-      }
-    });
+    let activeCatCopy = JSON.parse(JSON.stringify(this.state.activeCategories));
+    activeCatCopy[category.text] = category.selected;
     this.setState(prevState => {
-      return {categoryList: catListCopy};
+      return {activeCategories: activeCatCopy};
     });
   }
   createMuralsList() {
     let murals = [];
-    this.state.categoryList.forEach(category => {
-      if (category.selected) {
-        this.state.murals[category.text].forEach(item => {
-          murals.push(item);
-        });
+    this.state.murals.forEach(mural => {
+      if (this.state.activeCategories[mural.category]) {
+        murals.push(mural);
       }
     })
-    return murals
+    return murals;
   }
 
   render() {
@@ -63,6 +63,7 @@ class Home extends Component {
         />
         <CategorySelector
           categoryList={this.state.categoryList}
+          activeCategories={this.state.activeCategories}
           modifyCategory={this.modifyCategory}
         />
       </div>

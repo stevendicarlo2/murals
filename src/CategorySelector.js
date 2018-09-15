@@ -6,13 +6,14 @@ class CategorySelector extends React.Component {
     super(props);
     this.state = {
       categoryList: props.categoryList,
+      activeCategories: props.activeCategories,
     };
   }
   createCategories() {
     return this.state.categoryList.map((category, i) => {
       return <CategoryItem
-        text={category.text}
-        selected={category.selected}
+        text={category}
+        selected={this.state.activeCategories[category]}
         onChange={this.props.modifyCategory}
         key={i}
       />;
