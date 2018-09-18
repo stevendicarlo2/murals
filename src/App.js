@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from "./Home";
 import Menu from "./Menu";
+import MuralDetail from "./MuralDetail";
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
           ]}
           />}
         />
+        <Route exact={true} path={"/detail/:id"} component={MuralDetail}/>
       </div>
     );
   }

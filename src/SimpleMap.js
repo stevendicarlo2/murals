@@ -17,13 +17,13 @@ class SimpleMap extends React.Component {
         lat={mural.lat}
         lng={mural.lng}
         mural={mural}
-        key={i}
+        key={mural.id}
       />;
     });
   }
 
-  onChildClick() {
-    history.push("/menu");
+  onChildClick(key, childProps) {
+    history.push("/detail/" + childProps.mural.id);
   }
 
   render() {
