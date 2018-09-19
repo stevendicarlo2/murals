@@ -11,12 +11,29 @@ class SimpleMap extends React.Component {
     },
     zoom: 15
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hoverKey: null,
+    }
+    this.updateMuralList();
+  }
+  updateMuralList() {
+    const muralList = this.props.murals.map(mural => {
+      mural.hover = (mural.id == this.state.hoverKey);
+      return mural;
+    });
+    this.state = {
+      muralList: muralList,
+    }
+  }
   createLabelList() {
-    return this.props.murals.map((mural, i) => {
+    return this.state.muralList.map((mural, i) => {
       return <MuralLabel
         lat={mural.lat}
         lng={mural.lng}
         mural={mural}
+        hover={mural.hover}
         key={mural.id}
       />;
     });
@@ -26,7 +43,20 @@ class SimpleMap extends React.Component {
     history.push("/detail/" + childProps.mural.id);
   }
 
+  onChildMouseEnter = (key, childProps) => {
+    this.setState({
+      hoverKey: key,
+    })
+  }
+
+  onChildMouseLeave = (key, childProps) => {
+    this.setState({
+      hoverKey: null,
+    })
+  }
+
   render() {
+    this.updateMuralList();
     return (
       // Important! Always set the container height explicitly
       <div id="map">
@@ -35,6 +65,8 @@ class SimpleMap extends React.Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           onChildClick={this.onChildClick}
+          onChildMouseEnter={this.onChildMouseEnter}
+          onChildMouseLeave={this.onChildMouseLeave}
         >
           {this.createLabelList()}
         </GoogleMapReact>

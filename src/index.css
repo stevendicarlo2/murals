@@ -27,3 +27,14 @@ body {
   height: -moz-max-content;
   height: -webkit-max-content;
 }
+
+.muralLabelContainer {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: -10px;
+  top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
