@@ -5,6 +5,10 @@ import './App.css';
 import Home from "./Home";
 import Menu from "./Menu";
 import MuralDetail from "./MuralDetail";
+import About from "./About";
+import HowDoesItWork from "./HowDoesItWork";
+import RecommendMural from "./RecommendMural";
+import Feedback from "./Feedback";
 
 class App extends Component {
   render() {
@@ -30,6 +34,10 @@ class App extends Component {
           />}
         />
         <Route exact={true} path={"/detail/:id"} component={MuralDetail}/>
+        <Route exact={true} path={"/about"} component={About}/>
+        <Route exact={true} path={"/details"} component={HowDoesItWork}/>
+        <Route exact={true} path={"/recommend"} component={RecommendMural}/>
+        <Route exact={true} path={"/feedback"} component={Feedback}/>
       </div>
     );
   }
