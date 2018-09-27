@@ -37,6 +37,8 @@ class MuralDetail extends Component {
         <h2>Location:</h2>
         <h3>Latitude: {mural.lat}</h3>
         <h3>Longitude: {mural.lng}</h3>
+        <br/>
+        <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
       </div>
     );
   }
