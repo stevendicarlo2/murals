@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from "./Header";
 import axios from "axios";
 
 class MuralDetail extends Component {
@@ -30,15 +31,18 @@ class MuralDetail extends Component {
     const mural = this.state.muralInfo;
     return (
       <div>
-        <h1>Name: {mural.name}</h1>
-        <br/>
-        <h2>Category: {mural.category}</h2>
-        <br/>
-        <h2>Location:</h2>
-        <h3>Latitude: {mural.lat}</h3>
-        <h3>Longitude: {mural.lng}</h3>
-        <br/>
-        <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
+        <Header menuButton={true}/>
+        <div>
+          <h1>Name: {mural.name}</h1>
+          <br/>
+          <h2>Category: {mural.category}</h2>
+          <br/>
+          <h2>Location:</h2>
+          <h3>Latitude: {mural.lat}</h3>
+          <h3>Longitude: {mural.lng}</h3>
+          <br/>
+          <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
+        </div>
       </div>
     );
   }

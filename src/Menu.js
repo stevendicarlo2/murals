@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MenuItem from './MenuItem';
+import Header from "./Header";
 
 class Menu extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Menu extends Component {
   render() {
     return (
       <div>
+        <Header menuButton={false}/>
         {this.createList()}
       </div>
     );

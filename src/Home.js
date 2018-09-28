@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SimpleMap from './SimpleMap';
 import CategorySelector from "./CategorySelector";
-import axios from "axios"
+import axios from "axios";
+import Header from "./Header";
 
 class Home extends Component {
   constructor(props) {
@@ -59,15 +60,18 @@ class Home extends Component {
       return null;
     }
     return (
-      <div id="mapBox">
-        <SimpleMap
-          murals={this.createMuralsList()}
-        />
-        <CategorySelector
-          categoryList={this.state.categoryList}
-          activeCategories={this.state.activeCategories}
-          modifyCategory={this.modifyCategory}
-        />
+      <div>
+        <Header menuButton={true}/>
+        <div id="mapBox">
+          <SimpleMap
+            murals={this.createMuralsList()}
+          />
+          <CategorySelector
+            categoryList={this.state.categoryList}
+            activeCategories={this.state.activeCategories}
+            modifyCategory={this.modifyCategory}
+          />
+        </div>
       </div>
     );
   }
