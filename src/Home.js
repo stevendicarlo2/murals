@@ -19,14 +19,18 @@ class Home extends Component {
       const muralList = res.data;
       let categoryList = [];
       let activeCategories = {};
-      let modifiedMuralList = muralList.map((mural, i) => {
+      let modifiedMuralList = [];
+      muralList.forEach((mural, i) => {
+        if (!mural) {
+          return;
+        }
         const category = mural.category;
         activeCategories[category] = true;
         if (!categoryList.includes(category)) {
           categoryList.push(category);
         }
         mural["id"] = i;
-        return mural;
+        modifiedMuralList.push(mural);
       });
 
       this.setState({
