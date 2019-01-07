@@ -21,7 +21,9 @@ class MuralDetail extends Component {
       return axios.get(artistURL);
     })
     .then(res => {
+      const artistID = muralInfo.artist;
       muralInfo.artist = res.data;
+      muralInfo.artist.id = artistID;
       this.setState({
         muralInfo: muralInfo,
         loading: false,
@@ -42,8 +44,7 @@ class MuralDetail extends Component {
           <br/>
           <h2>Category: {mural.category}</h2>
           <br/>
-          <h3>Artist: {mural.artist.name}</h3>
-          <h3>{mural.artist.description}</h3>
+          <a href={"/artist/"+mural.artist.id}><h3>Artist: {mural.artist.name}</h3></a>
           <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
         </div>
       </div>

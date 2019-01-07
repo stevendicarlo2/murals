@@ -8,6 +8,7 @@ import About from "./About";
 import HowDoesItWork from "./HowDoesItWork";
 import RecommendMural from "./RecommendMural";
 import Feedback from "./Feedback";
+import ArtistDetail from "./ArtistDetail";
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
         <Route exact={true} path={"/details"} component={HowDoesItWork}/>
         <Route exact={true} path={"/recommend"} component={RecommendMural}/>
         <Route exact={true} path={"/feedback"} component={Feedback}/>
+        <Route exact={true} path={"/artist/:id"} component={ArtistDetail}/>
       </div>
     );
   }
