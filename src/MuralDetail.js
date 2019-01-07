@@ -13,10 +13,15 @@ class MuralDetail extends Component {
 
   loadInfo() {
     const muralURL = 'https://muralproject-483dd.firebaseio.com/murals/' + this.props.match.params.id + '.json';
+    let muralInfo = {};
     axios.get(muralURL)
     .then(res => {
-      const muralInfo = res.data;
-
+      muralInfo = res.data;
+      const artistURL = 'https://muralproject-483dd.firebaseio.com/artists/' + muralInfo.artist + '.json';
+      return axios.get(artistURL);
+    })
+    .then(res => {
+      muralInfo.artist = res.data;
       this.setState({
         muralInfo: muralInfo,
         loading: false,
@@ -37,10 +42,8 @@ class MuralDetail extends Component {
           <br/>
           <h2>Category: {mural.category}</h2>
           <br/>
-          <h2>Location:</h2>
-          <h3>Latitude: {mural.lat}</h3>
-          <h3>Longitude: {mural.lng}</h3>
-          <br/>
+          <h3>Artist: {mural.artist.name}</h3>
+          <h3>{mural.artist.description}</h3>
           <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
         </div>
       </div>
