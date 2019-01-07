@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import MuralLabel from "./MuralLabel.js";
 import history from "./history";
 
-class SimpleMap extends React.Component {
+class SimpleMap extends Component {
   static defaultProps = {
     center: {
       lat: 38.89,
@@ -20,7 +20,7 @@ class SimpleMap extends React.Component {
   }
   updateMuralList() {
     const muralList = this.props.murals.map(mural => {
-      mural.hover = (mural.id == this.state.hoverKey);
+      mural.hover = (mural.id === this.state.hoverKey);
       return mural;
     });
     this.state = {
@@ -45,7 +45,7 @@ class SimpleMap extends React.Component {
 
   onChildMouseEnter = (key, childProps) => {
     this.setState({
-      hoverKey: key,
+      hoverKey: parseInt(key, 10),
     })
   }
 

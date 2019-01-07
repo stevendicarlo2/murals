@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CategoryItem from "./CategoryItem";
 
-class CategorySelector extends React.Component {
+class CategorySelector extends Component {
   constructor(props) {
     super(props);
     this.state = {

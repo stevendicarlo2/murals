@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CategoryItem extends React.Component {
+class CategoryItem extends Component {
   static defaultProps = {
     selected: false,
     text: "Category"

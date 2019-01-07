@@ -13,7 +13,7 @@ class Header extends Component {
           </a>
         }
         <a href="/">
-          <img src={logo} alt="Header Image" className="headerImage"/>
+          <img src={logo} alt="Header Icon" className="headerImage"/>
         </a>
       </div>
     );

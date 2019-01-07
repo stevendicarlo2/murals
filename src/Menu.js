@@ -3,9 +3,6 @@ import MenuItem from './MenuItem';
 import Header from "./Header";
 
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   createList() {
     return this.props.linkList.map((item, i) => {
