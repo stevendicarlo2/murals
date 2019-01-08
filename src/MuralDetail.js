@@ -44,7 +44,12 @@ class MuralDetail extends Component {
           <br/>
           <h2>Category: {mural.category}</h2>
           <br/>
-          <a href={"/artist/"+mural.artist.id}><h3>Artist: {mural.artist.name}</h3></a>
+          <h3>Artist: <a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
+          <h3>Description: {mural.description}</h3>
+          <h3>Hashtag: {mural.hashtag}</h3>
+          <h3>Address: {mural.address}</h3>
+          <h3>{mural.other}</h3>
+
           <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
         </div>
       </div>
