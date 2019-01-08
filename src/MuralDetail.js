@@ -26,9 +26,34 @@ class MuralDetail extends Component {
       muralInfo.artist.id = artistID;
       this.setState({
         muralInfo: muralInfo,
+      });
+      if (muralInfo.hashtag.charAt(0) === '#') {
+        return muralInfo.hashtag.substring(1);
+      } else {
+        const temp = muralInfo.hashtag;
+        muralInfo.hashtag = "#" + muralInfo.hashtag;
+        return temp;
+      }
+    })
+    .then(hashtag => {
+      const url = 'https://www.instagram.com/explore/tags/'+hashtag+'/?__a=1';
+      return axios.get(url);
+    })
+    .then(res => {
+      const instagram = res.data.graphql.hashtag.edge_hashtag_to_media.edges;
+      this.setState({
+        instagram: instagram,
         loading: false,
       });
     });
+  }
+  
+  getInstagramImages() {
+    let list = []
+    this.state.instagram.forEach((image, i) => {
+      list.push(<img src={image.node.display_url} style={{height:"100px", width:"100px"}} key={i} alt=""/>);
+    });
+    return list;
   }
 
   render() {
@@ -36,6 +61,7 @@ class MuralDetail extends Component {
       return null;
     }
     const mural = this.state.muralInfo;
+    const instagramImages = this.getInstagramImages();
     return (
       <div>
         <Header menuButton={true}/>
@@ -46,12 +72,20 @@ class MuralDetail extends Component {
           <br/>
           <h3>Artist: <a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
           <h3>Description: {mural.description}</h3>
-          <h3>Hashtag: {mural.hashtag}</h3>
           <h3>Address: {mural.address}</h3>
           <h3>{mural.other}</h3>
-
           <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
         </div>
+        {(instagramImages.length === 0) ? (
+          <div>
+            <h3>There are no recent images with the hashtag {mural.hashtag}:</h3>
+          </div>
+        ) : (
+          <div>
+            <h3>Here are the most recent images with the hashtag {mural.hashtag}:</h3>
+            <div>{instagramImages}</div>
+          </div>
+        )}
       </div>
     );
   }
