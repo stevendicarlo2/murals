@@ -13,19 +13,28 @@ class SimpleMap extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      hoverKey: null,
-    }
-    this.updateMuralList();
-  }
-  updateMuralList() {
-    const muralList = this.props.murals.map(mural => {
-      mural.hover = (mural.id === this.state.hoverKey);
-      return mural;
-    });
+    const muralList = this.newMuralList(null);
     this.state = {
       muralList: muralList,
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.murals.length === this.props.murals.length) {
+      return;
     }
+    const muralList = this.newMuralList(null);
+    this.setState({
+      muralList: muralList,
+    });
+  }
+
+  newMuralList(hoverKey) {
+    const muralList = this.props.murals.map(mural => {
+      mural.hover = (mural.id === hoverKey);
+      return mural;
+    });
+    return muralList;
   }
   createLabelList() {
     return this.state.muralList.map((mural, i) => {
@@ -44,19 +53,21 @@ class SimpleMap extends Component {
   }
 
   onChildMouseEnter = (key, childProps) => {
+    const hoverKey = parseInt(key, 10);
+    const muralList = this.newMuralList(hoverKey);
     this.setState({
-      hoverKey: parseInt(key, 10),
-    })
+      muralList: muralList,
+    });
   }
 
   onChildMouseLeave = (key, childProps) => {
+    const muralList = this.newMuralList(null);
     this.setState({
-      hoverKey: null,
-    })
+      muralList: muralList,
+    });
   }
 
   render() {
-    this.updateMuralList();
     return (
       // Important! Always set the container height explicitly
       <div id="map">
