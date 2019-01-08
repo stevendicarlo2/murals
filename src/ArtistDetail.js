@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from "./Header";
+import SimpleMap from "./SimpleMap";
 import axios from "axios";
 
 class ArtistDetail extends Component {
@@ -18,6 +19,27 @@ class ArtistDetail extends Component {
       const artistInfo = res.data;
       this.setState({
         artistInfo: artistInfo,
+      });
+    })
+    .then(() => {
+      const muralURL = 'https://muralproject-483dd.firebaseio.com/murals.json';
+      return axios.get(muralURL);
+    })
+    .then(res => {
+      const muralList = res.data;
+      let filteredMuralList = [];
+      muralList.forEach((mural, i) => {
+        if (!mural) {
+          return;
+        }
+        if (mural.artist.toString() !== this.props.match.params.id) {
+          return;
+        }
+        mural.id = i;
+        filteredMuralList.push(mural);
+      });
+      this.setState({
+        muralList: filteredMuralList,
         loading: false,
       });
     });
@@ -36,6 +58,11 @@ class ArtistDetail extends Component {
           <br/>
           <h2>Description: {artist.description}</h2>
           <br/>
+        </div>
+        <div id="mapBox">
+          <SimpleMap
+            murals={this.state.muralList}
+          />
         </div>
       </div>
     );
