@@ -17,6 +17,9 @@ class Home extends Component {
     axios.get('https://muralproject-483dd.firebaseio.com/murals.json')
     .then(res => {
       const muralList = res.data;
+      if (!muralList) {
+        throw "Mural list does not exist";
+      }
       let categoryList = [];
       let activeCategories = {};
       let modifiedMuralList = [];
@@ -38,6 +41,12 @@ class Home extends Component {
         activeCategories: activeCategories,
         categoryList: categoryList,
         loading: false,
+      });
+    })
+    .catch(error => {
+      this.setState({
+        loading: false,
+        error: error,
       });
     });
   }
@@ -62,6 +71,9 @@ class Home extends Component {
   render() {
     if (this.state.loading) {
       return null;
+    }
+    if (this.state.error) {
+      return <div><p>{this.state.error.toString()}</p></div>;
     }
     return (
       <div>

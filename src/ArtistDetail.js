@@ -17,6 +17,9 @@ class ArtistDetail extends Component {
     axios.get(artistURL)
     .then(res => {
       const artistInfo = res.data;
+      if (!artistInfo) {
+        throw "Artist with that id does not exist";
+      }
       this.setState({
         artistInfo: artistInfo,
       });
@@ -27,6 +30,9 @@ class ArtistDetail extends Component {
     })
     .then(res => {
       const muralList = res.data;
+      if (!muralList) {
+        throw "Mural list does not exist";
+      }
       let filteredMuralList = [];
       muralList.forEach((mural, i) => {
         if (!mural) {
@@ -42,12 +48,21 @@ class ArtistDetail extends Component {
         muralList: filteredMuralList,
         loading: false,
       });
+    })
+    .catch(error => {
+      this.setState({
+        loading: false,
+        error: error,
+      });
     });
   }
 
   render() {
     if (this.state.loading) {
       return null;
+    }
+    if (this.state.error) {
+      return <div><p>{this.state.error.toString()}</p></div>;
     }
     const artist = this.state.artistInfo;
     return (
