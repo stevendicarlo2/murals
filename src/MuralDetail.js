@@ -17,10 +17,16 @@ class MuralDetail extends Component {
     axios.get(muralURL)
     .then(res => {
       muralInfo = res.data;
+      if (!muralInfo) {
+        throw "Mural with that id does not exist";
+      }
       const artistURL = 'https://muralproject-483dd.firebaseio.com/artists/' + muralInfo.artist + '.json';
       return axios.get(artistURL);
     })
     .then(res => {
+      if (!res.data) {
+        throw "Artist with that id does not exist";
+      }
       const artistID = muralInfo.artist;
       muralInfo.artist = res.data;
       muralInfo.artist.id = artistID;
@@ -35,6 +41,12 @@ class MuralDetail extends Component {
         return temp;
       }
     })
+    .catch(error => {
+      this.setState({
+        loading: false,
+        error: error,
+      });
+    })
     .then(hashtag => {
       const url = 'https://www.instagram.com/explore/tags/'+hashtag+'/?__a=1';
       return axios.get(url);
@@ -43,6 +55,12 @@ class MuralDetail extends Component {
       const instagram = res.data.graphql.hashtag.edge_hashtag_to_media.edges;
       this.setState({
         instagram: instagram,
+        loading: false,
+      });
+    })
+    .catch(e => {
+      this.setState({
+        instagram: [],
         loading: false,
       });
     });
@@ -59,6 +77,9 @@ class MuralDetail extends Component {
   render() {
     if (this.state.loading) {
       return null;
+    }
+    if (this.state.error) {
+      return <div><p>{this.state.error.toString()}</p></div>;
     }
     const mural = this.state.muralInfo;
     const instagramImages = this.getInstagramImages();
