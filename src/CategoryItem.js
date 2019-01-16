@@ -21,9 +21,9 @@ class CategoryItem extends Component {
   }
   render() {
     return (
-      <div>
-        <input type="checkbox" onChange={() => this.updateSelected()} checked={this.state.selected}/>
-        {this.state.text}
+      <div className="categoryItem">
+        <input type="checkbox" id={"checkbox"+this.state.text} onChange={() => this.updateSelected()} checked={this.state.selected}/>
+        <label htmlFor={"checkbox"+this.state.text}>{this.state.text}</label>
       </div>
     );
   }

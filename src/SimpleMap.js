@@ -38,7 +38,7 @@ class SimpleMap extends Component {
       const zoom = 16;
       return {center: center, zoom: zoom};
     }
-    const size = {width: window.innerWidth, height: window.innerHeight*.7};
+    const size = {width: window.innerWidth, height: window.innerHeight-300};
     let north = firstMural.lat;
     let south = firstMural.lat;
     let east = firstMural.lng;

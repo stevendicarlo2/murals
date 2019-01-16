@@ -1,22 +1,32 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  padding: 3px;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-#mapBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#homeMessage h1 {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#homeMessage h2 {
+  font-size: 18px;
+  color: #5B3770;
+  font-weight: bold;
 }
 
 #map {
-  width: 70%;
-  height: 70vh;
+  width: 100%;
+  height: calc(100vh - 300px);
+  /* This calculation is intended to make the map on the homepage as big 
+  as possible, allowing for the header and three categories to be on the screen, 
+  which happen to have a height of 300px. 
+  If this height changes, also change the findMapBounds function 
+  in SimpleMap.js accordingly */
 }
 
 .muralLabel {
-  background-color: #377fa8;
+  background-color: #5B3770;
   border-radius: 3px;
   border-color: black;
   border-width: 1px;
@@ -37,6 +47,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.categorySelector {
+  float: left;
+}
+
+.categoryItem {
+  float: left;
+  clear: left;
 }
 
 .muralImage {

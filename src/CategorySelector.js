@@ -21,7 +21,8 @@ class CategorySelector extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="categorySelector">
+        <p>Find murals by category</p>
         {this.createCategories()}
       </div>
     );
