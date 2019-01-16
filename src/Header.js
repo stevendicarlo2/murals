@@ -15,6 +15,9 @@ class Header extends Component {
         <a href="/">
           <img src={logo} alt="Header Icon" className="headerImage"/>
         </a>
+        {this.props.menuButton &&
+          <div className="centeringDiv"/>
+        }
       </div>
     );
   }

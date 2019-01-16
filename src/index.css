@@ -45,17 +45,24 @@ body {
 }
 
 .header {
-  padding: 50px;
+  padding: 25px;
+  border-bottom: solid gray 1px;
 }
 
 .headerImage {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   transform: rotate(30deg);
 }
 
 .menuIcon {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   float: left;
+}
+
+.centeringDiv {
+  width: 30px;
+  height: 30px;
+  float: right;
 }
