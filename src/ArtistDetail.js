@@ -68,16 +68,18 @@ class ArtistDetail extends Component {
     return (
       <div>
         <Header menuButton={true}/>
-        <div>
-          <h1>Name: {artist.name}</h1>
-          <br/>
-          <h2>Description: {artist.description}</h2>
-          <br/>
-        </div>
-        <div id="mapBox">
-          <SimpleMap
-            murals={this.state.muralList}
-          />
+        <div className="body">
+          <div>
+            <h1>Name: {artist.name}</h1>
+            <br/>
+            <h2>Description: {artist.description}</h2>
+            <br/>
+          </div>
+          <div id="mapBox">
+            <SimpleMap
+              murals={this.state.muralList}
+            />
+          </div>
         </div>
       </div>
     );

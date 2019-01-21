@@ -78,19 +78,21 @@ class Home extends Component {
     return (
       <div>
         <Header menuButton={true}/>
-        <div id="homeMessage">
-          <h1>The easiest way to find murals in DC</h1>
-          <h2>Tap below to discover the murals!</h2>
-        </div>
-        <div id="mapBox">
-          <SimpleMap
-            murals={this.createMuralsList()}
-          />
-          <CategorySelector
-            categoryList={this.state.categoryList}
-            activeCategories={this.state.activeCategories}
-            modifyCategory={this.modifyCategory}
-          />
+        <div className="body">
+          <div id="homeMessage">
+            <h1>The easiest way to find murals in DC</h1>
+            <h2>Tap below to discover the murals!</h2>
+          </div>
+          <div id="mapBox">
+            <SimpleMap
+              murals={this.createMuralsList()}
+            />
+            <CategorySelector
+              categoryList={this.state.categoryList}
+              activeCategories={this.state.activeCategories}
+              modifyCategory={this.modifyCategory}
+            />
+          </div>
         </div>
       </div>
     );

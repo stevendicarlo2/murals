@@ -86,27 +86,29 @@ class MuralDetail extends Component {
     return (
       <div>
         <Header menuButton={true}/>
-        <div>
-          <h1>Name: {mural.name}</h1>
-          <br/>
-          <h2>Category: {mural.category}</h2>
-          <br/>
-          <h3>Artist: <a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
-          <h3>Description: {mural.description}</h3>
-          <h3>Address: {mural.address}</h3>
-          <h3>{mural.other}</h3>
-          <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
+        <div className="body">
+          <div>
+            <h1>Name: {mural.name}</h1>
+            <br/>
+            <h2>Category: {mural.category}</h2>
+            <br/>
+            <h3>Artist: <a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
+            <h3>Description: {mural.description}</h3>
+            <h3>Address: {mural.address}</h3>
+            <h3>{mural.other}</h3>
+            <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
+          </div>
+          {(instagramImages.length === 0) ? (
+            <div>
+              <h3>There are no recent images with the hashtag {mural.hashtag}:</h3>
+            </div>
+          ) : (
+            <div>
+              <h3>Here are the most recent images with the hashtag {mural.hashtag}:</h3>
+              <div>{instagramImages}</div>
+            </div>
+          )}
         </div>
-        {(instagramImages.length === 0) ? (
-          <div>
-            <h3>There are no recent images with the hashtag {mural.hashtag}:</h3>
-          </div>
-        ) : (
-          <div>
-            <h3>Here are the most recent images with the hashtag {mural.hashtag}:</h3>
-            <div>{instagramImages}</div>
-          </div>
-        )}
       </div>
     );
   }

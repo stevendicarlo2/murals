@@ -30,7 +30,9 @@ class About extends Component {
     return (
       <div>
         <Header menuButton={true}/>
-        <p>{this.state.message}</p>
+        <div className="body">
+          <p>{this.state.message}</p>
+        </div>
       </div>
     );
   }

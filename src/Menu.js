@@ -18,7 +18,9 @@ class Menu extends Component {
     return (
       <div>
         <Header menuButton={false}/>
-        {this.createList()}
+        <div className="body">
+          {this.createList()}
+        </div>
       </div>
     );
   }
