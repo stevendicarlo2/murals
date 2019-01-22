@@ -18,7 +18,7 @@ class ArtistDetail extends Component {
     .then(res => {
       const artistInfo = res.data;
       if (!artistInfo) {
-        throw "Artist with that id does not exist";
+        throw new Error("Artist with that id does not exist");
       }
       this.setState({
         artistInfo: artistInfo,
@@ -31,7 +31,7 @@ class ArtistDetail extends Component {
     .then(res => {
       const muralList = res.data;
       if (!muralList) {
-        throw "Mural list does not exist";
+        throw new Error("Mural list does not exist");
       }
       let filteredMuralList = [];
       muralList.forEach((mural, i) => {

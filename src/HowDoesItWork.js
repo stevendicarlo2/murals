@@ -15,10 +15,19 @@ class HowDoesItWork extends Component {
     const url = 'https://muralproject-483dd.firebaseio.com/info_pages/how_it_works.json';
     axios.get(url)
     .then(res => {
+      if (!res.data) {
+        throw new Error("Error loading info page");
+      }
       const info = res.data;
       this.setState({
         message: info,
         loading: false,
+      });
+    })
+    .catch(error => {
+      this.setState({
+        loading: false,
+        error: error,
       });
     });
   }
@@ -26,6 +35,9 @@ class HowDoesItWork extends Component {
   render() {
     if (this.state.loading) {
       return <div><Header animate={true}/></div>;
+    }
+    if (this.state.error) {
+      return <div><p>{this.state.error.toString()}</p></div>;
     }
     return (
       <div>

@@ -18,7 +18,7 @@ class Home extends Component {
     .then(res => {
       const muralList = res.data;
       if (!muralList) {
-        throw "Mural list does not exist";
+        throw new Error("Mural list does not exist");
       }
       let categoryList = [];
       let activeCategories = {};

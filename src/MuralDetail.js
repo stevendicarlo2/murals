@@ -27,14 +27,14 @@ class MuralDetail extends Component {
     .then(res => {
       muralInfo = res.data;
       if (!muralInfo) {
-        throw "Mural with that id does not exist";
+        throw new Error("Mural with that id does not exist");
       }
       const artistURL = 'https://muralproject-483dd.firebaseio.com/artists/' + muralInfo.artist + '.json';
       return axios.get(artistURL);
     })
     .then(res => {
       if (!res.data) {
-        throw "Artist with that id does not exist";
+        throw new Error("Artist with that id does not exist");
       }
       const artistID = muralInfo.artist;
       muralInfo.artist = res.data;
