@@ -6,19 +6,21 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="header">
-        {this.props.menuButton &&
-          <a href="/menu">
-            <img src={menu} alt="Menu Icon" className="menuIcon"/>
+      <nav className="mynavbar fixed-top ">
+        <div className="header">
+          {this.props.menuButton &&
+            <a href="/menu">
+              <img src={menu} alt="Menu Icon" className="menuIcon"/>
+            </a>
+          }
+          <a href="/">
+            <img src={logo} alt="Header Icon" className="headerImage"/>
           </a>
-        }
-        <a href="/">
-          <img src={logo} alt="Header Icon" className="headerImage"/>
-        </a>
-        {this.props.menuButton &&
-          <div className="centeringDiv"/>
-        }
-      </div>
+          {this.props.menuButton &&
+            <div className="centeringDiv"/>
+          }
+        </div>
+      </nav>
     );
   }
 }

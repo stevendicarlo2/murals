@@ -9,11 +9,16 @@ import HowDoesItWork from "./HowDoesItWork";
 import RecommendMural from "./RecommendMural";
 import Feedback from "./Feedback";
 import ArtistDetail from "./ArtistDetail";
+import {Helmet} from "react-helmet";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Helmet>
+          <title>My Title</title>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+        </Helmet>
         <Route exact={true} path={"/"} component={Home}/>
         <Route exact={true}
           path={"/menu"}
