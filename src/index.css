@@ -15,6 +15,21 @@ body {
   font-weight: bold;
 }
 
+#muralDetailTitle {
+  font-size: 24px;
+  color: #5B3770;
+  font-weight: bold;
+}
+
+h3.muralDetail {
+  font-size: 20px;
+}
+
+#muralDetailArtist a:visited {
+  text-decoration: none;
+  color: #0000FF;
+}
+
 #map {
   width: 100%;
   height: calc(100vh - 300px);
@@ -59,8 +74,7 @@ body {
 }
 
 .muralImage {
-  width: 400px;
-  height: 400px;
+  width: 100%;
 }
 
 .header {
@@ -98,4 +112,9 @@ body {
   width: 30px;
   height: 30px;
   float: right;
+}
+
+.instagramImage {
+  width: 100%;
+  height: 100%;
 }

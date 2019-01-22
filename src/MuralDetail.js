@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from "./Header";
+import SimpleMap from "./SimpleMap";
 import axios from "axios";
 
 class MuralDetail extends Component {
@@ -30,6 +31,7 @@ class MuralDetail extends Component {
       const artistID = muralInfo.artist;
       muralInfo.artist = res.data;
       muralInfo.artist.id = artistID;
+      muralInfo.id = this.props.match.params.id;
       this.setState({
         muralInfo: muralInfo,
       });
@@ -69,7 +71,7 @@ class MuralDetail extends Component {
   getInstagramImages() {
     let list = []
     this.state.instagram.forEach((image, i) => {
-      list.push(<img src={image.node.display_url} style={{height:"100px", width:"100px"}} key={i} alt=""/>);
+      list.push(<div className="col-4" key={i}><img src={image.node.display_url} className="instagramImage" alt=""/></div>);
     });
     return list;
   }
@@ -88,26 +90,32 @@ class MuralDetail extends Component {
         <Header menuButton={true}/>
         <div className="body">
           <div>
-            <h1>Name: {mural.name}</h1>
+            <h1 id="muralDetailTitle">{mural.name} Mural</h1>
             <br/>
-            <h2>Category: {mural.category}</h2>
-            <br/>
-            <h3>Artist: <a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
-            <h3>Description: {mural.description}</h3>
-            <h3>Address: {mural.address}</h3>
-            <h3>{mural.other}</h3>
+            <h3 className="muralDetail"><b>Artist: </b><a href={"/artist/"+mural.artist.id}>{mural.artist.name}</a></h3>
             <img src={mural.image} alt={"Image of " + mural.name} className="muralImage"/>
+            <br/>
+            <br/>
+            <h3 className="muralDetail"><b>About: </b><span className="notBold">{mural.description}</span></h3>
+            <h3 className="muralDetail"><b>Address: </b><span className="notBold">{mural.address}</span></h3>
+            <h3 className="notBold">{mural.other}</h3>
+            <div id="mapBox">
+              <SimpleMap
+                murals={[this.state.muralInfo]}
+              />
+            </div>
+            <br/>
+            {(instagramImages.length === 0) ? (
+              <div>
+                <h3 className="muralDetail">There are no recent Instagram posts with the hashtag {mural.hashtag}:</h3>
+              </div>
+            ) : (
+              <div>
+                <h3 className="muralDetail">Here are the most recent Instagram posts with the hashtag {mural.hashtag}:</h3>
+                <div className="instagramSet row">{instagramImages}</div>
+              </div>
+            )}
           </div>
-          {(instagramImages.length === 0) ? (
-            <div>
-              <h3>There are no recent images with the hashtag {mural.hashtag}:</h3>
-            </div>
-          ) : (
-            <div>
-              <h3>Here are the most recent images with the hashtag {mural.hashtag}:</h3>
-              <div>{instagramImages}</div>
-            </div>
-          )}
         </div>
       </div>
     );
