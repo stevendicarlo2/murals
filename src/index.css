@@ -40,6 +40,20 @@ h3.muralDetail {
   in SimpleMap.js accordingly */
 }
 
+@keyframes pulse_animation {
+    0% { transform: scale(1) rotate(30deg); }
+    25% { transform: scale(1.3) rotate(30deg); }
+    50% { transform: scale(.9) rotate(30deg); }
+    90% { transform: scale(1) rotate(30deg); }
+}
+
+.pulse {
+    animation-name: pulse_animation;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
 .muralLabel {
   background-color: #5B3770;
   border-radius: 3px;

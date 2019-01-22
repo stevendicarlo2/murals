@@ -25,7 +25,7 @@ class RecommendMural extends Component {
 
   render() {
     if (this.state.loading) {
-      return null;
+      return <div><Header animate={true}/></div>;
     }
     return (
       <div>

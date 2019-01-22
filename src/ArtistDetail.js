@@ -59,7 +59,7 @@ class ArtistDetail extends Component {
 
   render() {
     if (this.state.loading) {
-      return null;
+      return <div><Header animate={true}/></div>;
     }
     if (this.state.error) {
       return <div><p>{this.state.error.toString()}</p></div>;

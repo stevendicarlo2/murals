@@ -11,10 +11,18 @@ class MuralDetail extends Component {
       loading: true,
     };
   }
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   loadInfo() {
     const muralURL = 'https://muralproject-483dd.firebaseio.com/murals/' + this.props.match.params.id + '.json';
     let muralInfo = {};
+    // For testing the loading animations:
+    // this.sleep(4000)
+    // .then(() => {
+    //   return axios.get(muralURL);
+    // })
     axios.get(muralURL)
     .then(res => {
       muralInfo = res.data;
@@ -78,7 +86,7 @@ class MuralDetail extends Component {
 
   render() {
     if (this.state.loading) {
-      return null;
+      return <div><Header animate={true}/></div>;
     }
     if (this.state.error) {
       return <div><p>{this.state.error.toString()}</p></div>;

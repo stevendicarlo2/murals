@@ -13,9 +13,13 @@ class Header extends Component {
               <img src={menu} alt="Menu Icon" className="menuIcon"/>
             </a>
           }
-          <a href="/">
-            <img src={logo} alt="Header Icon" className="headerImage"/>
-          </a>
+          {this.props.animate ? (
+            <img src={logo} alt="Header Icon" className="headerImage pulse"/>
+          ):(
+            <a href="/">
+              <img src={logo} alt="Header Icon" className="headerImage"/>
+            </a>
+          )}
           {this.props.menuButton &&
             <div className="centeringDiv"/>
           }
