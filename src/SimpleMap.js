@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 import MuralLabel from "./MuralLabel.js";
+import UserIcon from "./UserIcon.js";
 import history from "./history";
 
 class SimpleMap extends Component {
@@ -12,6 +13,7 @@ class SimpleMap extends Component {
     this.state = {
       muralList: muralList,
       mapBounds: bounds,
+      loading: true,
     };
   }
 
@@ -23,6 +25,34 @@ class SimpleMap extends Component {
     this.setState({
       muralList: muralList,
     });
+  }
+  
+  componentDidMount(props) {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          this.setState({
+            loading: false,
+            userIsLocated: true,
+            userLocation: { lat: latitude, lng: longitude },
+          });
+        },
+        error => {
+          this.setState({
+            loading: false,
+            userIsLocated: false,
+            locationError: error,
+          });
+        }
+      );
+    } else {
+      this.setState({
+        loading: false,
+        userIsLocated: false,
+        locationError: "Location data not allowed",
+      });
+    }
   }
 
   findMapBounds() {
@@ -81,9 +111,19 @@ class SimpleMap extends Component {
       />;
     });
   }
+  
+  createUserIcon(coords, id) {
+    return <UserIcon
+      lat={coords.lat}
+      lng={coords.lng}
+      key={id}
+    />;
+  }
 
   onChildClick(key, childProps) {
-    history.push("/detail/" + childProps.mural.id);
+    if (childProps.mural) {
+      history.push("/detail/" + childProps.mural.id);
+    }
   }
 
   onChildMouseEnter = (key, childProps) => {
@@ -114,6 +154,9 @@ class SimpleMap extends Component {
           onChildMouseLeave={this.onChildMouseLeave}
         >
           {this.createLabelList()}
+          {!this.state.loading && this.state.userIsLocated && 
+            this.createUserIcon(this.state.userLocation, this.state.muralList[this.state.muralList.length-1].id+1)
+          }
         </GoogleMapReact>
       </div>
     );

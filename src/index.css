@@ -54,6 +54,29 @@ h3.muralDetail {
     animation-timing-function: ease-out;
 }
 
+.userIcon {
+  background-color: #5B3770;
+  border-radius: 3px;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  color: white;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  height: -moz-max-content;
+  height: -webkit-max-content;
+}
+
+.userIconContainer {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: -10px;
+  top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .muralLabel {
   background-color: #5B3770;
   border-radius: 3px;
