@@ -55,16 +55,8 @@ h3.muralDetail {
 }
 
 .userIcon {
-  background-color: #5B3770;
-  border-radius: 3px;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
-  color: white;
-  width: -moz-max-content;
-  width: -webkit-max-content;
-  height: -moz-max-content;
-  height: -webkit-max-content;
+  width: 20px;
+  height: 20px;
 }
 
 .userIconContainer {
