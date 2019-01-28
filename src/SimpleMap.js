@@ -42,7 +42,7 @@ class SimpleMap extends Component {
           this.setState({
             loading: false,
             userIsLocated: false,
-            locationError: error,
+            locationError: error.message,
           });
         }
       );
@@ -50,7 +50,7 @@ class SimpleMap extends Component {
       this.setState({
         loading: false,
         userIsLocated: false,
-        locationError: "Location data not allowed",
+        locationError: "Location data not available",
       });
     }
   }
@@ -158,6 +158,9 @@ class SimpleMap extends Component {
             this.createUserIcon(this.state.userLocation, this.state.muralList[this.state.muralList.length-1].id+1)
           }
         </GoogleMapReact>
+        { !this.state.userIsLocated && 
+          <p>{this.state.locationError}</p>
+        }
       </div>
     );
   }
